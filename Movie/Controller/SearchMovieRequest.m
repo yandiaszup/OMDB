@@ -30,7 +30,12 @@ static SearchMovieRequest *instance = nil;
     NSMutableArray *postersURL = [[NSMutableArray alloc] init];
     
     NSData *data =  [NSData dataWithContentsOfURL:[NSURL URLWithString:urlstring]];
+    if(data ==nil){
+        return [[NSMutableArray alloc] init];
+    }
+    
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+    
     for (NSDictionary *movieDict in json[@"Search"]){
         NSString *poster = movieDict[@"imdbID"];
         [postersURL addObject:poster];
@@ -41,9 +46,14 @@ static SearchMovieRequest *instance = nil;
 -(NSMutableArray*) searchPosterURL: (NSString*) movieID{
     NSString *urlString = [NSString stringWithFormat:@"https://www.omdbapi.com/?s=%@&page=%d&apikey=56c108cd",movieID,page];
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
     NSError *err;
     NSMutableArray *postersURL = [[NSMutableArray alloc] init];
     NSData *data =  [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+    if(data ==nil){
+        return [[NSMutableArray alloc] init];
+    }
+    
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
     for (NSDictionary *movieDict in json[@"Search"]){
         NSString *poster = movieDict[@"Poster"];
@@ -56,6 +66,9 @@ static SearchMovieRequest *instance = nil;
     NSString *urlString = [NSString stringWithFormat:@"https://www.omdbapi.com/?i=%@&apikey=56c108cd",movieID];
     NSError *err;
     NSData *data =  [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+    if(data ==nil){
+        return [[Movie alloc] init];
+    }
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
     Movie *movie = [[Movie alloc] initWithDictionary:json];
     return movie;

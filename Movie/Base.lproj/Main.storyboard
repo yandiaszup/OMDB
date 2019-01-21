@@ -19,9 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-MT-YMx">
-                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <rect key="frame" x="0.0" y="120" width="414" height="567"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="0.0" id="Oxr-A6-FnW">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="Oxr-A6-FnW">
                                     <size key="itemSize" width="114" height="156"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -57,52 +57,23 @@
                                     <outlet property="delegate" destination="J8F-5Y-ukk" id="PKo-AP-7TM"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EW0-gz-0YG">
-                                <rect key="frame" x="0.0" y="64" width="414" height="95"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="yQK-xN-4ev"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvd-OF-qir">
-                                <rect key="frame" x="314" y="81.666666666666671" width="60" height="60.000000000000014"/>
-                                <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="F0E-N9-MUV"/>
-                                    <constraint firstAttribute="height" constant="60" id="Z8C-h9-qoI"/>
-                                </constraints>
-                                <state key="normal" title="Search">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                            <searchBar contentMode="redraw" barStyle="black" placeholder="Enter a movie name" translatesAutoresizingMaskIntoConstraints="NO" id="zYo-uc-rBD">
+                                <rect key="frame" x="0.0" y="64" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="search"/>
                                 <connections>
-                                    <action selector="searchButton:" destination="J8F-5Y-ukk" eventType="touchUpInside" id="MIV-e1-wXr"/>
+                                    <outlet property="delegate" destination="J8F-5Y-ukk" id="Vl8-aD-jPc"/>
                                 </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a movie name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0JA-wJ-jnn">
-                                <rect key="frame" x="40" y="91.666666666666671" width="234" height="40.000000000000014"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="R3X-4V-4Gb"/>
-                                </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="go"/>
-                            </textField>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.28718021370000002" green="0.28718021370000002" blue="0.28718021370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pvd-OF-qir" firstAttribute="centerY" secondItem="EW0-gz-0YG" secondAttribute="centerY" id="Euz-FP-Gr7"/>
-                            <constraint firstItem="iMt-MT-YMx" firstAttribute="top" secondItem="qSO-un-wky" secondAttribute="top" id="KA2-7n-k1G"/>
-                            <constraint firstItem="qSO-un-wky" firstAttribute="trailing" secondItem="EW0-gz-0YG" secondAttribute="trailing" id="XIC-on-cPB"/>
-                            <constraint firstItem="0JA-wJ-jnn" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" constant="40" id="YCV-uK-oUM"/>
+                            <constraint firstItem="zYo-uc-rBD" firstAttribute="trailing" secondItem="qSO-un-wky" secondAttribute="trailing" id="6pR-qk-tCs"/>
+                            <constraint firstItem="iMt-MT-YMx" firstAttribute="top" secondItem="zYo-uc-rBD" secondAttribute="bottom" id="KA2-7n-k1G"/>
                             <constraint firstItem="iMt-MT-YMx" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" id="Z6v-nl-GVG"/>
-                            <constraint firstItem="EW0-gz-0YG" firstAttribute="top" secondItem="qSO-un-wky" secondAttribute="top" id="gLN-aZ-pHU"/>
                             <constraint firstItem="qSO-un-wky" firstAttribute="bottom" secondItem="iMt-MT-YMx" secondAttribute="bottom" id="haj-9o-dB8"/>
-                            <constraint firstItem="qSO-un-wky" firstAttribute="trailing" secondItem="pvd-OF-qir" secondAttribute="trailing" constant="40" id="qU4-YO-o6c"/>
-                            <constraint firstItem="0JA-wJ-jnn" firstAttribute="centerY" secondItem="EW0-gz-0YG" secondAttribute="centerY" id="rTk-c8-Yup"/>
+                            <constraint firstItem="zYo-uc-rBD" firstAttribute="top" secondItem="qSO-un-wky" secondAttribute="top" id="hzz-R1-2dJ"/>
+                            <constraint firstItem="zYo-uc-rBD" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" id="k2t-RY-Nxw"/>
                             <constraint firstItem="qSO-un-wky" firstAttribute="trailing" secondItem="iMt-MT-YMx" secondAttribute="trailing" id="u9d-BO-EsF"/>
-                            <constraint firstItem="pvd-OF-qir" firstAttribute="leading" secondItem="0JA-wJ-jnn" secondAttribute="trailing" constant="40" id="xNa-0I-Wfd"/>
-                            <constraint firstItem="EW0-gz-0YG" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" id="xlu-N5-fD8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qSO-un-wky"/>
                     </view>
@@ -112,16 +83,14 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
-                        <outlet property="button" destination="pvd-OF-qir" id="cHH-Lb-7Vo"/>
                         <outlet property="collectionView" destination="iMt-MT-YMx" id="Pgf-bN-bvj"/>
-                        <outlet property="searchBar" destination="0JA-wJ-jnn" id="gS6-Ae-ilB"/>
-                        <outlet property="topHeader" destination="EW0-gz-0YG" id="7Zu-6j-hLJ"/>
+                        <outlet property="searchBar" destination="zYo-uc-rBD" id="Pkk-Xc-sxh"/>
                         <segue destination="csz-Cx-3o2" kind="show" id="oRp-Vv-dra"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0H-Lx-SGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2049" y="-609"/>
+            <point key="canvasLocation" x="2047.826086956522" y="-609.78260869565224"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="wHK-w5-Uo0">
