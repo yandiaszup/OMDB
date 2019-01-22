@@ -10,11 +10,9 @@
 #import "Movie.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchMovieRequest : NSObject
-{
+@interface SearchMovieRequest : NSObject{
     int page;
 }
-
 +(id) instance;
 -(NSMutableArray*) searchMovie: (NSString *)title;
 -(NSMutableArray*) searchPosterURL: (NSString*) movieID;

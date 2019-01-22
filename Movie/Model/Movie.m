@@ -16,13 +16,14 @@
     self = [super init];
     if (self) {
         self.title = @"xablau";
+
     }
     return self;
 }
 
--(id)initWithDictionary:(NSDictionary *)dictionary{
+-(id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
-    if(self){
+    if(self) {
         self.title = dictionary[@"Title"];
         self.runtime = dictionary[@"Runtime"];
         self.released = dictionary[@"Released"];
