@@ -23,6 +23,7 @@
 @property (strong,nonatomic) NSString *imdbRating;
 @property (strong,nonatomic) NSString *production;
 @property (strong,nonatomic) NSString *awards;
+@property (strong,nonatomic) NSData *posterImage;
 
 -(id) initWithDictionary: (NSDictionary*) dictionary;
 -(id)initWithEntity:(NSString *)dictionary;

@@ -9,6 +9,8 @@
 #import "SearchMovieRequest.h"
 #import "Movie.h"
 #import "Reachability.h"
+#import "AFNetworking.h"
+
 @implementation SearchMovieRequest
 
 static SearchMovieRequest *instance = nil;
@@ -24,8 +26,22 @@ static SearchMovieRequest *instance = nil;
     page = 0;
 }
 
--(NSMutableArray*) searchMovie: (NSString *) title {
+- (NSURLSessionTask *)test:(NSString*) title success:(void (^)(NSMutableArray *dic))success{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSURL *URL = [NSURL URLWithString:[self buildURL:title]];
+    
+    return [manager GET:URL.absoluteString parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        success(NULL);
 
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        
+    }];
+}
+
+
+-(NSMutableArray*) searchMovie: (NSString *) title {
     NSString *urlstring = [self buildURL:title];
     NSError *err;
     NSMutableArray *postersURL = [[NSMutableArray alloc] init];

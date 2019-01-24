@@ -70,9 +70,7 @@
     [self.topHeader.layer setShadowOffset:CGSizeMake(0, 1)];
     [self.topHeader.layer setShadowOpacity:0.5];
     [self.topHeader.layer setShadowRadius:5];
-    
     [self BlurEfect];
-    
 }
 
 -(void)BlurEfect{
@@ -82,14 +80,5 @@
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.topHeader addSubview:blurEffectView];;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

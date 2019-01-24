@@ -86,7 +86,6 @@
     for (NSManagedObject *managedObject in items)
     {
         [context deleteObject:managedObject];
-        NSLog(@"deleting");
     }
 }
 
@@ -133,9 +132,7 @@
 }
 
 -(void)showMovieInformation{
-    NSURL *poster = [NSURL URLWithString:_movie.poster];
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:poster];
-    
+    NSData *imageData = [[NSData alloc] initWithData:self.movie.posterImage];
     self.background.image = [UIImage imageWithData:imageData];
     self.poster.image = [UIImage imageWithData:imageData];
     self.movietitle.text = self.movie.title;
@@ -156,12 +153,5 @@
     [self.background addSubview:blurEffectView];;
 }
 
-/*
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

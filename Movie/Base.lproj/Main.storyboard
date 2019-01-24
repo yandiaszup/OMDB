@@ -64,16 +64,24 @@
                                     <outlet property="delegate" destination="J8F-5Y-ukk" id="Vl8-aD-jPc"/>
                                 </connections>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="KHB-kV-bmL">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <color key="color" red="0.99936348200000003" green="0.50114232299999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.28718021370000002" green="0.28718021370000002" blue="0.28718021370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zYo-uc-rBD" firstAttribute="trailing" secondItem="qSO-un-wky" secondAttribute="trailing" id="6pR-qk-tCs"/>
                             <constraint firstItem="iMt-MT-YMx" firstAttribute="top" secondItem="zYo-uc-rBD" secondAttribute="bottom" id="KA2-7n-k1G"/>
+                            <constraint firstItem="KHB-kV-bmL" firstAttribute="trailing" secondItem="qSO-un-wky" secondAttribute="trailing" id="U7C-Au-LoA"/>
                             <constraint firstItem="iMt-MT-YMx" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" id="Z6v-nl-GVG"/>
+                            <constraint firstItem="KHB-kV-bmL" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" id="ggK-Pp-S8L"/>
                             <constraint firstItem="qSO-un-wky" firstAttribute="bottom" secondItem="iMt-MT-YMx" secondAttribute="bottom" id="haj-9o-dB8"/>
                             <constraint firstItem="zYo-uc-rBD" firstAttribute="top" secondItem="qSO-un-wky" secondAttribute="top" id="hzz-R1-2dJ"/>
                             <constraint firstItem="zYo-uc-rBD" firstAttribute="leading" secondItem="qSO-un-wky" secondAttribute="leading" id="k2t-RY-Nxw"/>
                             <constraint firstItem="qSO-un-wky" firstAttribute="trailing" secondItem="iMt-MT-YMx" secondAttribute="trailing" id="u9d-BO-EsF"/>
+                            <constraint firstAttribute="bottom" secondItem="KHB-kV-bmL" secondAttribute="bottom" id="xId-o6-otk"/>
+                            <constraint firstItem="KHB-kV-bmL" firstAttribute="top" secondItem="RF6-kC-1L4" secondAttribute="top" constant="64" id="y6S-ny-h26"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qSO-un-wky"/>
                     </view>
@@ -83,6 +91,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
+                        <outlet property="acivityIndicator" destination="KHB-kV-bmL" id="Kan-Ny-SME"/>
                         <outlet property="collectionView" destination="iMt-MT-YMx" id="Pgf-bN-bvj"/>
                         <outlet property="searchBar" destination="zYo-uc-rBD" id="Pkk-Xc-sxh"/>
                         <segue destination="csz-Cx-3o2" kind="show" id="oRp-Vv-dra"/>

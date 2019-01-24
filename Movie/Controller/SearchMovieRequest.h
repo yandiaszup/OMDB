@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "Movie.h"
+#import "ViewController.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchMovieRequest : NSObject{
     int page;
 }
+@property (strong,nonatomic) ViewController *vc;
+
 +(id) instance;
 -(NSMutableArray*) searchMovie: (NSString *)title;
 -(NSMutableArray*) searchPosterURL: (NSString*) movieID;

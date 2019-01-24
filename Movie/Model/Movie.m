@@ -36,6 +36,7 @@
         self.imdbRating = dictionary[@"imdbRating"];
         self.production = dictionary[@"Production"];
         self.awards = dictionary[@"Awards"];
+        self.posterImage = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.poster]];
     }
     return self;
 }
@@ -55,6 +56,7 @@
         self.imdbRating = [dictionary valueForKey:@"imdbRating"];
         self.production = [dictionary valueForKey:@"production"];
         self.awards = [dictionary valueForKey:@"awards"];
+        self.posterImage = [dictionary valueForKey:@"posterImage"];
     }
     return self;
 }
