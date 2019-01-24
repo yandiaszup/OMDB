@@ -14,6 +14,7 @@
 #import "StoredFavoritesController.h"
 #import "Reachability.h"
 #import "AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>{
     AppDelegate *appDelegate;
@@ -42,7 +43,7 @@
 -(NSString*) buildURL: (NSString *) title {
     page += 1;
     NSString *newTitle = [title stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSString *apiKey = [NSString stringWithFormat:@"&apikey=56c108cd"];
+    NSString *apiKey = [NSString stringWithFormat:@"&apikey=f4179530"];
     NSString *finalURL = [NSString stringWithFormat:@"https://www.omdbapi.com/?s=%@&page=%d%@",newTitle,page,apiKey];
     return finalURL;
 }
@@ -68,8 +69,6 @@
     
     [manager GET:URL.absoluteString parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
         for (NSDictionary *movieDict in responseObject[@"Search"]){
-            NSLog(@"%@",movieDict);
-            NSData *imageData = [[NSData alloc]initWithContentsOfURL:URL];
             [self.movieList addObject:[movieDict valueForKey:@"imdbID"]];
             [self.movieIDList addObject:[movieDict valueForKey:@"Poster"]];
         }
@@ -88,39 +87,16 @@
     if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]!=NotReachable)
     {
         NSString *moviePosterUrl = _movieIDList[indexPath.row];
-        NSURL *posterUrl = [NSURL URLWithString:moviePosterUrl];
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:posterUrl];
-        cell.posterImage.image = [UIImage imageWithData:imageData];
+        [cell.posterImage sd_setImageWithURL:[NSURL URLWithString:moviePosterUrl]];
     }
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self.view setUserInteractionEnabled:(NO)];
     UIStoryboard * storyboard = self.storyboard;
     MovieDetailViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"MovieDetail"];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    NSString *stringURL = [NSString stringWithFormat:@"https://www.omdbapi.com/?i=%@&apikey=56c108cd", self.movieList[indexPath.row]];
-    NSURL *URL = [NSURL URLWithString: stringURL];
-    
-    [manager GET:URL.absoluteString parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
-        Movie *moviee = [[Movie alloc] initWithDictionary:responseObject];
-        vc.movie = moviee;
-        NSArray *results = [[StoredFavoritesController instance] favoriteMovies];
-        NSArray *results1 = [[NSArray alloc] initWithArray:[results valueForKey:@"title"]];
-        if([results1 containsObject:vc.movie.title]){
-            [vc favorite];
-        } else {
-            [vc notFavorite];
-        }
-        [self.navigationController pushViewController:vc animated:YES];
-    } failure:^(NSURLSessionTask *operation, NSError *error) {
-        UIStoryboard * storyboard = self.storyboard;
-        ViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"PopUp"];
-        [self presentViewController:vc animated:YES completion:nil];
-    }];
+    vc.imdbID = self.movieList[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

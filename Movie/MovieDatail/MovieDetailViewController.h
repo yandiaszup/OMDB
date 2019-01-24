@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
     Boolean isFavorited;
 }
 @property (strong,nonatomic) Movie *movie;
+@property (strong,nonatomic) NSString *imdbID;
 -(void)favorite;
 -(void)notFavorite;
 @end

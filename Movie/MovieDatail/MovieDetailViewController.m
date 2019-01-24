@@ -9,6 +9,9 @@
 #import "MovieDetailViewController.h"
 #import "AppDelegate.h"
 #import "Movie.h"
+#import "AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "StoredFavoritesController.h"
 
 @interface MovieDetailViewController () <UIScrollViewDelegate>{
     AppDelegate *appDelegate;
@@ -33,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *star3;
 @property (weak, nonatomic) IBOutlet UIImageView *star4;
 @property (weak, nonatomic) IBOutlet UIImageView *star5;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 @end
@@ -41,12 +45,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_movie test];
-    [self draw];
-    
+    [self.activityIndicator startAnimating];
     if (isFavorited){
         [self.favoriteButton setTitle:@"Delete from favorites" forState:UIControlStateNormal];
+        [self draw];
     }   else {
+        [self searchMovie];
         [self.favoriteButton setTitle:@"Favorite" forState:UIControlStateNormal];
     }
     
@@ -60,6 +64,30 @@
 
 -(void)notFavorite{
     isFavorited = false;
+}
+
+-(void) searchMovie{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *urlstring = [NSString stringWithFormat:@"https://www.omdbapi.com/?i=%@&apikey=f4179530",self.imdbID];
+    NSURL *URL = [NSURL URLWithString:urlstring];
+    [self.activityIndicator setHidden:NO];
+    [manager GET:URL.absoluteString parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
+        Movie *moviee = [[Movie alloc] initWithDictionary:responseObject];
+        self.movie = moviee;
+        NSArray *results = [[StoredFavoritesController instance] favoriteMovies];
+        NSArray *results1 = [[NSArray alloc] initWithArray:[results valueForKey:@"title"]];
+        if([results1 containsObject:self.movie.title]){
+            [self favorite];
+        } else {
+            [self notFavorite];
+        }
+        [self draw];
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        [self.navigationController popViewControllerAnimated:YES];
+        UIStoryboard * storyboard = self.storyboard;
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"PopUp"];
+        [self presentViewController:vc animated:YES completion:nil];
+    }];
 }
 
 - (IBAction)favorite:(id)sender {
@@ -135,6 +163,7 @@
     NSData *imageData = [[NSData alloc] initWithData:self.movie.posterImage];
     self.background.image = [UIImage imageWithData:imageData];
     self.poster.image = [UIImage imageWithData:imageData];
+    [self.activityIndicator setHidden:YES];
     self.movietitle.text = self.movie.title;
     self.date.text = self.movie.released;
     self.timestamp.text = self.movie.runtime;
